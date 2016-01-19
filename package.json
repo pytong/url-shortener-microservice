@@ -1,0 +1,29 @@
+{
+  "name": "url-shortener-service",
+  "version": "1.0.1",
+  "description": "This API shortens a URL.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pytong/url-shortener-microservice"
+  },
+  "homepage": "https://url-shortener-service.herokuapp.com",
+  "bugs": "https://github.com/pytong/url-shortener-microservice/issues",
+  "keywords": [
+    "MongoDB",
+    "Mongoose",
+    "url shortener",
+    "Express",
+    "Node"
+  ],
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Puiyee Tong",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^1.2.0",
+    "express": "^4.13.3",
+    "mongoose": "^4.3.6"
+  }
+}

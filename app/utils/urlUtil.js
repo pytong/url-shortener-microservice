@@ -1,5 +1,7 @@
 "use strict";
 
+let Url = require("../models/urls");
+
 module.exports = {
 
     isValidUrl: (url) => {
@@ -11,6 +13,11 @@ module.exports = {
         } else {
             return false;
         }
-    }
+    },
 
+    shortenUrl: (url) => {
+        let uuid = Math.random().toString(36).substr(2, 8);
+
+        return uuid;
+    }
 }
