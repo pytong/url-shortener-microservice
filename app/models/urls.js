@@ -5,7 +5,7 @@ let mongoose = require('mongoose'),
 
 	Url = new Schema({
 		original_url: String,
-		short_url: String
+		uuid: String
 	});
 
 module.exports = mongoose.model('Url', Url);

@@ -15,8 +15,25 @@ module.exports = {
         }
     },
 
-    shortenUrl: (url) => {
-        let uuid = Math.random().toString(36).substr(2, 8);
+    shortenUrl: (original_url) => {
+        let uuid;
+
+        Url.findOne({original_url: original_url}, (err, url) => {
+            if(err) { return null; }
+
+            if(typeof(url) === "undefined" || url === null) {
+                uuid = Math.random().toString(36).substr(2, 8);
+
+                url = new Url();
+                url.original_url = original_url;
+                url.uuid = uuid;
+
+                url.save((err) => {
+                    if(err) { return null; }
+                    return uuid;
+                });
+            }
+        });
 
         return uuid;
     }
