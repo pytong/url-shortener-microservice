@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').load(); // Only required for running locally
+// require('dotenv').load(); // Only required for running locally
 
 let express = require('express'),
 	routes = require('./app/routes/index.js'),
