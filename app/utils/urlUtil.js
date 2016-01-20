@@ -15,26 +15,24 @@ module.exports = {
         }
     },
 
-    shortenUrl: (original_url) => {
-        let uuid;
+    shortenUrl: (original_url, callback) => {
+        let errorMessage = "Failed to shorten url. Please try again later.";
 
         Url.findOne({original_url: original_url}, (err, url) => {
-            if(err) { return null; }
+            if(err) { return callback(false, errorMessage); }
 
             if(typeof(url) === "undefined" || url === null) {
-                uuid = Math.random().toString(36).substr(2, 8);
-
                 url = new Url();
                 url.original_url = original_url;
-                url.uuid = uuid;
+                url.uuid = Math.random().toString(36).substr(2, 8);
 
                 url.save((err) => {
-                    if(err) { return null; }
-                    return uuid;
+                    if(err) { return callback(false, errorMessage); }
+                    return callback(true, url.uuid);
                 });
+            } else {
+                callback(true, url.uuid);
             }
         });
-
-        return uuid;
     }
 }

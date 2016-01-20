@@ -13,8 +13,14 @@ module.exports = (app) => {
 				shortUrl;
 
 			if(isValid) {
-				shortUrl = urlUtil.shortenUrl(url);
-				res.json({original_url: url, short_url: shortUrl});
+				urlUtil.shortenUrl(url, (success, result) => {
+					if(success === false) {
+						return res.json({original_url: url, short_url: null});
+					}
+
+					shortUrl = req.protocol + '://' + req.get('host') + "/" + result;
+					res.json({original_url: url, short_url: shortUrl});
+				});
 			} else {
 				res.json({error: "Invalid URL"});
 			}
