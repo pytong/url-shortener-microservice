@@ -15,7 +15,7 @@ module.exports = (app) => {
 			if(isValid) {
 				urlUtil.shortenUrl(url, (success, result) => {
 					if(success === false) {
-						return res.json({original_url: url, short_url: null});
+						return res.json({error: result});
 					}
 
 					shortUrl = req.protocol + '://' + req.get('host') + "/" + result;
@@ -24,6 +24,19 @@ module.exports = (app) => {
 			} else {
 				res.json({error: "Invalid URL"});
 			}
+		});
+
+	app.route("/:uuid")
+		.get((req, res) => {
+			let uuid = req.params.uuid;
+
+			urlUtil.getOriginalUrl(uuid, (success, result) => {
+				if(success === false) {
+					return res.json({error: result});
+				}
+
+				res.redirect(result);
+			});
 		});
 
 	app.get("/", (req, res)  => {

@@ -34,5 +34,17 @@ module.exports = {
                 callback(true, url.uuid);
             }
         });
+    },
+
+    getOriginalUrl: (uuid, callback) => {
+        Url.findOne({uuid: uuid}, (err, url) => {
+           if(err) { return callback(false, "Failed to get original url. Please try again later.") };
+
+           if(typeof(url) === "undefined" || url === null) {
+               return callback(false, "Uuid not found.");
+           } else {
+               callback(true, url.original_url);
+           }
+        });
     }
 }
